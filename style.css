@@ -41,7 +41,7 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 .content-section small { font-size: 0.85em; color: var(--text-light); display: block; margin-top: 5px; }
 
 /* ===== PAGINA 1 Specifiek ===== */
-.main-content-wrapper { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; /* Iets meer gap weer */ }
+.main-content-wrapper { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; }
 
 /* Test Formulier */
 .test-form-container fieldset { border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; margin-bottom: 25px; background-color: #fdfdfd; position: relative; }
@@ -66,93 +66,26 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 #back-to-test-button { background-color: var(--text-light); font-size: 0.9em; padding: 8px 15px; position: absolute; left: 40px; top: 50%; transform: translateY(-50%); border: none; border-radius: 6px; color: var(--white); cursor: pointer; transition: background-color 0.3s ease; }
 #back-to-test-button:hover { background-color: var(--text-dark); }
 
-/* === NIEUW: BMI Calculator Styling === */
-.bmi-calculator-container {
-    padding: 20px;
-    background-color: var(--light-blue-bg);
-    border-radius: 8px;
-    border: 1px solid var(--primary-blue);
-}
-.bmi-calculator-container h3 {
-    color: var(--primary-blue-dark);
-    margin-top: 0;
-    margin-bottom: 20px;
-    text-align: center;
-    border-bottom: none; /* Geen lijn onder deze h3 */
-}
-.calculator-form .input-group {
-    margin-bottom: 15px;
-}
-.calculator-form label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 5px;
-    font-size: 0.9em;
-    color: var(--text-dark);
-}
-.calculator-form input[type="number"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    font-size: 1em;
-    -moz-appearance: textfield; /* Verberg pijltjes in Firefox */
-}
+/* === BMI Calculator Styling === */
+.bmi-calculator-container { padding: 20px; background-color: var(--light-blue-bg); border-radius: 8px; border: 1px solid var(--primary-blue); }
+.bmi-calculator-container h3 { color: var(--primary-blue-dark); margin-top: 0; margin-bottom: 20px; text-align: center; border-bottom: none; }
+.calculator-form .input-group { margin-bottom: 15px; }
+.calculator-form label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9em; color: var(--text-dark); }
+.calculator-form input[type="number"] { width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 1em; -moz-appearance: textfield; }
 .calculator-form input[type="number"]::-webkit-outer-spin-button,
-.calculator-form input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none; /* Verberg pijltjes in Chrome/Safari */
-    margin: 0;
-}
-#calculate-bmi-button {
-    display: block;
-    width: 100%;
-    background-color: var(--primary-blue-dark); /* Iets donkerder */
-    color: var(--white);
-    border: none;
-    padding: 10px 20px;
-    font-size: 1em;
-    font-weight: 600;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-#calculate-bmi-button:hover {
-    background-color: var(--primary-blue);
-}
-.bmi-result-display {
-    text-align: center;
-    font-size: 1.1em;
-    font-weight: 600;
-    padding: 15px;
-    background-color: var(--white);
-    border: 1px dashed var(--primary-blue);
-    border-radius: 4px;
-    margin-bottom: 10px;
-    min-height: 50px; /* Zorg dat het altijd wat ruimte inneemt */
-}
-#bmi-value {
-    font-weight: 700;
-    color: var(--primary-blue-dark);
-}
-#bmi-category { /* Standaard kleur */
-    font-weight: 700;
-}
+.calculator-form input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+#calculate-bmi-button { display: block; width: 100%; background-color: var(--primary-blue-dark); color: var(--white); border: none; padding: 10px 20px; font-size: 1em; font-weight: 600; border-radius: 6px; cursor: pointer; transition: background-color 0.3s ease; margin-top: 10px; margin-bottom: 20px; }
+#calculate-bmi-button:hover { background-color: var(--primary-blue); }
+.bmi-result-display { text-align: center; font-size: 1.1em; font-weight: 600; padding: 15px; background-color: var(--white); border: 1px dashed var(--primary-blue); border-radius: 4px; margin-bottom: 10px; min-height: 50px; line-height: 1.3; }
+#bmi-value { font-weight: 700; color: var(--primary-blue-dark); }
+#bmi-category { font-weight: 700; }
 /* Kleuren voor BMI categorie */
 .bmi-cat-normal { color: var(--success-green); }
 .bmi-cat-overweight { color: var(--warning-orange); }
 .bmi-cat-obese { color: var(--danger-red); }
-.bmi-cat-underweight { color: var(--primary-blue); } /* Voor ondergewicht */
-.bmi-cat-error { color: var(--danger-red); } /* Voor foutmelding */
-
-.bmi-instruction {
-    font-size: 0.85em;
-    text-align: center;
-    color: var(--text-light);
-    margin-top: 15px;
-}
-/* === EINDE BMI Calculator Styling === */
+.bmi-cat-underweight { color: var(--primary-blue); }
+.bmi-cat-error { color: var(--danger-red); }
+.bmi-instruction { font-size: 0.85em; text-align: center; color: var(--text-light); margin-top: 15px; }
 
 /* ===== PAGINA 2 Specifiek ===== */
 .score-display-section { text-align: center; padding: 20px; background-color: var(--light-blue-bg); border-radius: 8px; margin-bottom: 30px; }
@@ -204,7 +137,7 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 /* --- Tablet & Small Laptop --- */
 @media (max-width: 992px) {
     .main-content-wrapper { grid-template-columns: 1fr; gap: 30px; }
-    .bmi-calculator-container { margin-top: 0; } /* Geen extra marge */
+    .bmi-calculator-container { margin-top: 0; }
     .page { padding: 20px 25px; }
     .page-header { padding: 15px 25px; margin: -20px -25px 25px -25px; flex-direction: column; text-align: center; }
     .page-header h1 { font-size: 1.6em; margin-top: 10px; }
@@ -231,9 +164,27 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
     /* Form optimalisaties */
     .test-form-container fieldset { padding: 15px; margin-bottom: 20px; }
     .test-form-container legend { font-size: 1em; }
-    .test-form-container label { padding: 12px 10px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; }
-    .test-form-container label input[type="radio"] { margin-right: 8px; flex-shrink: 0; }
-    .test-form-container .points { position: static; transform: none; margin-left: auto; padding: 1px 5px; font-size: 0.85em; flex-shrink: 0; margin-top: 3px; }
+    /* == AANPASSING: Label layout fix == */
+    .test-form-container label {
+        padding: 12px 10px;
+        display: flex; /* Blijft flex */
+        flex-wrap: wrap; /* Blijft wrappen */
+        align-items: center; /* Blijft centreren verticaal */
+        /* justify-content: space-between; */ /* VERWIJDERD! */
+    }
+    .test-form-container label input[type="radio"] {
+        margin-right: 8px; /* Behoud ruimte na radio */
+        flex-shrink: 0;
+    }
+    .test-form-container .points {
+        position: static; /* Behoud static */
+        transform: none; /* Behoud none */
+        margin-left: auto; /* Laat dit de punten naar rechts duwen */
+        padding: 1px 5px;
+        font-size: 0.85em;
+        flex-shrink: 0;
+        margin-top: 3px;
+    }
     .waist-columns { flex-direction: column; gap: 15px; }
     .test-form-container fieldset p { font-size: 0.95em; line-height: 1.5; }
 
@@ -260,9 +211,16 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
     .advice-item p { font-size: 0.85em;}
 
     /* Smartphone BMI Calculator Layout */
-    .bmi-calculator-container { padding: 15px; } /* Iets minder padding */
+    .bmi-calculator-container { padding: 15px; }
     .bmi-calculator-container h3 { font-size: 1.2em; margin-bottom: 15px; }
-    .calculator-form input[type="number"] { padding: 8px; font-size: 0.95em;}
-    #calculate-bmi-button { padding: 10px 15px; font-size: 0.95em; }
+    .calculator-form label { font-size: 0.9em;}
+    .calculator-form input[type="number"] {
+        padding: 12px 10px; /* Grotere padding */
+        font-size: 1em; /* Groter font */
+    }
+    #calculate-bmi-button {
+        padding: 12px 15px; /* Grotere padding */
+        font-size: 1em; /* Groter font */
+    }
     .bmi-result-display { font-size: 1em; padding: 10px; }
 }
