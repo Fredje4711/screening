@@ -28,7 +28,7 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 
 /* ===== Headers & Footers ===== */
 .page-header { background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark)); color: var(--white); padding: 20px 40px; margin: -30px -40px 30px -40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 4px solid var(--primary-blue-dark); }
-.page-header h1 { font-size: 1.8em; margin: 0; }
+.page-header h1 { font-size: 1.8em; margin: 0; word-break: break-word; /* Zekerheid */ }
 .logo-placeholder { font-weight: bold; font-size: 1.2em; opacity: 0.8; }
 .result-header { position: relative; }
 .page-footer { text-align: center; margin-top: 30px; padding-top: 15px; border-top: 1px solid var(--border-color); font-size: 0.85em; color: var(--text-light); }
@@ -53,14 +53,16 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 .waist-columns { display: flex; gap: 20px; margin-bottom: 10px; }
 .waist-columns > div { flex: 1; }
 .waist-columns strong { display: block; margin-bottom: 8px; font-weight: 600; }
-/* == Fix 1: Text wrap in fieldsets == */
+/* Fix 1: Text wrap in fieldsets */
 .test-form-container fieldset p {
-    overflow-wrap: break-word; /* Zorgt dat lange zinnen afbreken */
-    word-wrap: break-word; /* Oudere fallback */
-    word-break: break-word; /* Extra fallback/forceer */
-    -webkit-hyphens: auto; /* Voor Safari */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word; /* Forceer afbreken waar nodig */
+    -webkit-hyphens: auto;
     -moz-hyphens: auto;
-    hyphens: auto; /* Optioneel: voeg koppeltekens toe */
+    hyphens: auto;
+    white-space: normal; /* Zorg dat het niet op één lijn blijft */
+    /* border: 1px dotted red; */ /* TEMPORARY DEBUG */
 }
 
 /* Button */
@@ -72,39 +74,19 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 #back-to-test-button:hover { background-color: var(--text-dark); }
 
 /* BMI Tabel */
-.bmi-table-container { padding: 20px; background-color: var(--light-blue-bg); border-radius: 8px; border: 1px solid var(--primary-blue); }
+.bmi-table-container { padding: 20px; background-color: var(--light-blue-bg); border-radius: 8px; border: 1px solid var(--primary-blue); position: relative; /* Nodig voor wrapper pos */ }
 .bmi-table-container h3 { color: var(--primary-blue-dark); margin-top: 0; }
 .bmi-table-container p { margin-bottom: 5px; }
 .bmi-table-wrapper {
-    overflow-x: auto; /* Blijft cruciaal */
+    overflow-x: auto;
     margin-bottom: 15px;
-    -webkit-overflow-scrolling: touch; /* Vloeiend scrollen iOS */
+    -webkit-overflow-scrolling: touch;
     padding-bottom: 8px;
-    position: relative; /* Nodig voor pseudo-element schaduw */
+    /* border: 2px solid lime; */ /* TEMPORARY DEBUG */
 }
 .mobile-scroll-hint { display: none; }
-/* == Fix 3: Visuele scroll hint (optioneel) == */
-.bmi-table-wrapper::after { /* Subtiele schaduw aan rechterkant */
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 8px; /* Match padding-bottom */
-    width: 20px; /* Breedte van de schaduw */
-    background: linear-gradient(to left, rgba(0,0,0,0.1), rgba(0,0,0,0));
-    pointer-events: none; /* Voorkom dat het klikken blokkeert */
-    opacity: 0; /* Standaard onzichtbaar */
-    transition: opacity 0.3s ease; /* Vloeiende overgang */
-}
-/* Toon schaduw alleen als er gescrolled kan worden (op mobiel) */
-@media (max-width: 992px) {
-    .bmi-table-wrapper::after {
-        opacity: 1; /* Maak zichtbaar op kleinere schermen */
-    }
-}
-
-
-.bmi-table-wrapper table { width: 100%; border-collapse: collapse; font-size: 0.8em; background-color: var(--white); min-width: 600px; }
+.bmi-table-wrapper::after { content: ''; position: absolute; top: 0; right: 0; bottom: 8px; width: 20px; background: linear-gradient(to left, rgba(0,0,0,0.1), rgba(0,0,0,0)); pointer-events: none; opacity: 0; transition: opacity 0.3s ease; }
+.bmi-table-wrapper table { width: 100%; border-collapse: collapse; font-size: 0.8em; background-color: var(--white); min-width: 600px; /* border: 2px solid magenta; */ /* TEMPORARY DEBUG */ }
 .bmi-table-container th, .bmi-table-container td { border: 1px solid var(--border-color); padding: 5px; text-align: center; min-width: 25px; }
 .bmi-table-container thead th { background-color: #e0e0e0; font-weight: 600; position: sticky; top: 0; z-index: 1; }
 .bmi-table-container thead th:first-child { background-color: #ccc; font-weight: 700; width: 35px; color: var(--text-dark); position: sticky; left: 0; z-index: 2; }
@@ -121,13 +103,13 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 .score-display-section h2 { border-bottom: none; display: block; margin-bottom: 10px; }
 .final-score { font-size: 4em; font-weight: 700; color: var(--primary-blue-dark); margin: 10px 0; line-height: 1; }
 .score-interpretation-section h3 { text-align: center; border-bottom: none; margin-bottom: 25px; }
-.risicometer-container { display: flex; gap: 30px; align-items: stretch; }
-.risicometer { position: relative; width: 40px; min-height: 280px; margin-right: 20px; padding: 10px 0; flex-shrink: 0; }
-.risicometer-bar { width: 100%; height: 100%; background: linear-gradient(to top, var(--danger-red), var(--warning-orange) 46.1%, var(--warning-orange) 50%, var(--success-green) 73.1%, var(--success-green)); border-radius: 20px; display: block; /* Zekerheid */ }
+.risicometer-container { display: flex; gap: 30px; align-items: stretch; /* border: 1px dashed blue; */ /* TEMPORARY DEBUG */ }
+.risicometer { position: relative; width: 40px; min-height: 280px; margin-right: 20px; padding: 10px 0; flex-shrink: 0; /* border: 2px solid orange; */ /* TEMPORARY DEBUG */ }
+.risicometer-bar { width: 100%; height: 100%; background: linear-gradient(to top, var(--danger-red), var(--warning-orange) 46.1%, var(--warning-orange) 50%, var(--success-green) 73.1%, var(--success-green)); border-radius: 20px; display: block; /* border: 3px solid red; */ /* TEMPORARY DEBUG */ }
 .risicometer-marker { position: absolute; left: calc(100% + 10px); transform: translateY(-50%); font-size: 0.9em; font-weight: 600; background-color: var(--white); padding: 0 5px; color: var(--text-light); }
 .score-indicator { position: absolute; left: -25px; width: 20px; font-size: 1.5em; color: var(--primary-blue-dark); transform: translateY(-50%); transition: top 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); top: 100%; }
-.score-details { flex: 1; display: flex; flex-direction: column; justify-content: space-around; min-width: 0; }
-.score-category { padding: 15px; border: 2px dashed var(--border-color); margin-bottom: 15px; border-radius: 8px; transition: background-color 0.3s ease, border-color 0.3s ease; }
+.score-details { flex: 1; display: flex; flex-direction: column; justify-content: space-around; min-width: 0; /* border: 2px solid green; */ /* TEMPORARY DEBUG */ }
+.score-category { padding: 15px; border: 2px dashed var(--border-color); margin-bottom: 15px; border-radius: 8px; transition: background-color 0.3s ease, border-color 0.3s ease; /* border: 1px solid purple !important; */ /* TEMPORARY DEBUG */ }
 .score-category:last-child { margin-bottom: 0; }
 .score-category strong { display: block; margin-bottom: 8px; font-size: 1.15em; color: var(--text-dark); }
 .score-category p { font-size: 0.95em; line-height: 1.5; color: var(--text-light); margin-bottom: 0; }
@@ -142,7 +124,6 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 
 /* Placeholder styling */
 .placeholder { background-color: #e9ecef; border: 1px dashed #ced4da; color: #6c757d; display: flex; align-items: center; justify-content: center; border-radius: 4px; font-size: 0.8em; text-align: center; padding: 5px; }
-/* == Fix 2: Placeholder definitief weghalen uit CSS == */
 .small-placeholder { display: none; }
 .icon-placeholder { width: 50px; height: 50px; margin: 0 auto 10px auto; border-radius: 50%; }
 .logo-placeholder { height: 40px; width: 120px; font-size: 0.9em; font-weight: bold; }
@@ -161,6 +142,7 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 .more-info-link a:hover { color: var(--light-blue-bg); text-decoration: none; }
 .logos { display: flex; justify-content: center; align-items: center; gap: 30px; margin-top: 20px; }
 
+
 /* ===== Responsive Aanpassingen & Mobile Optimizations ===== */
 
 /* --- Tablet & Small Laptop --- */
@@ -172,13 +154,15 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
     .page-header h1 { font-size: 1.6em; margin-top: 10px; }
     #back-to-test-button { position: relative; display: block; margin: 15px auto 0 auto; left: auto; top: auto; transform: none; }
 
-    /* == Fix 4: Tablet Score Interpretatie Layout == */
-    .risicometer-container { flex-direction: column; align-items: center; gap: 0; /* Geen gap */ }
-    .risicometer { margin-right: 0; margin-bottom: 30px; width: 35px; min-height: 200px; display: block; /* Zekerheid */ }
-    .risicometer-bar { display: block; /* Zekerheid */ }
+    /* Tablet Score Interpretatie Layout */
+    .risicometer-container { flex-direction: column; align-items: center; gap: 0; }
+    .risicometer { margin-right: 0; margin-bottom: 30px; width: 35px; min-height: 200px; display: block; }
+    .risicometer-bar { display: block; }
     .risicometer-marker { left: calc(100% + 8px); }
     .score-indicator { left: -20px; }
-    .score-details { width: 100%; display: block; /* Geen flex nodig */ }
+    .score-details { width: 100%; display: block; }
+    /* Fix 3: Toon scroll hint schaduw al op tablet */
+     .bmi-table-wrapper::after { opacity: 1; }
 }
 
 /* --- Smartphone --- */
@@ -204,28 +188,60 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
     /* Resultaten optimalisatie */
     .final-score { font-size: 3em; }
 
-    /* == Fix 4: Smartphone Score Interpretatie Layout == */
-    .risicometer { min-height: 180px; margin-bottom: 25px; }
-    .score-category { padding: 10px; margin-bottom: 10px; }
-    .score-category strong { font-size: 1.1em; }
-    .score-category p { font-size: 0.9em; }
+    /* Fix 4: Smartphone Score Interpretatie Layout */
+    .risicometer {
+        min-height: 180px;
+        margin-bottom: 25px;
+        width: 100%; /* Laat de container volle breedte nemen */
+        max-width: 50px; /* Maar beperk de breedte van de meter zelf */
+        margin-left: auto; /* Centreer de meter ongeveer */
+        margin-right: auto;
+        padding: 10px 5px; /* Iets padding voor markers */
+        position: relative; /* Behoud relatieve positie */
+    }
+    .risicometer-bar {
+        height: 180px; /* Geef expliciete hoogte */
+        width: 100%; /* Balk vult de .risicometer container */
+        display: block; /* Zekerheid */
+        border-radius: 10px; /* Iets minder rond */
+    }
+     .risicometer-marker {
+         left: calc(100% + 5px); /* Iets dichterbij */
+         font-size: 0.8em;
+    }
+     .score-indicator {
+        left: -15px; /* Dichterbij */
+        font-size: 1.3em;
+     }
+    .score-details {
+        display: block; /* Zekerheid */
+        width: 100%;
+    }
+    .score-category {
+        padding: 12px;
+        margin-bottom: 12px;
+        display: block; /* Zekerheid */
+        opacity: 1; /* Zekerheid */
+        visibility: visible; /* Zekerheid */
+    }
+    .score-category strong { font-size: 1.05em; }
+    .score-category p { font-size: 0.9em; line-height: 1.45; }
 
     /* Grid stacking */
     .advice-grid, .info-grid { grid-template-columns: 1fr; gap: 15px; }
     .advice-item p { font-size: 0.85em;}
 
-    /* == Fix 3: Smartphone BMI Tabel Scroll & Layout == */
+    /* Fix 3: Smartphone BMI Tabel Scroll & Layout */
     .bmi-table-container p { font-size: 0.9em; }
     .mobile-scroll-hint { display: inline; font-style: italic; font-size: 0.9em; color: var(--text-light); }
     .bmi-table-wrapper {
          border: 1px solid var(--primary-blue);
          border-radius: 4px;
-         /* Schaduw hint expliciet hier (overerft van 992px) */
          box-shadow: inset -10px 0px 8px -8px rgba(0,0,0,0.1);
     }
     .bmi-table-wrapper table { font-size: 0.75em; min-width: 550px; }
     .bmi-table-container th, .bmi-table-container td { padding: 4px 3px; }
-    /* Sticky positionering expliciet voor 576px */
+    /* Sticky positionering expliciet + achtergronden! */
     .bmi-table-container thead th { position: sticky; top: 0; z-index: 1; background-color: #e0e0e0; }
     .bmi-table-container thead th:first-child { position: sticky; left: 0; z-index: 2; background-color: #ccc; }
     .bmi-table-container tbody td:first-child { position: sticky; left: 0; z-index: 1; background-color: var(--white); }
