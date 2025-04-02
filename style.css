@@ -53,6 +53,13 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 .waist-columns { display: flex; gap: 20px; margin-bottom: 10px; }
 .waist-columns > div { flex: 1; }
 .waist-columns strong { display: block; margin-bottom: 8px; font-weight: 600; }
+/* == Fix 1: Text wrap in fieldsets == */
+.test-form-container fieldset p {
+    overflow-wrap: break-word; /* Zorgt dat lange zinnen afbreken */
+    word-wrap: break-word; /* Oudere fallback */
+    hyphens: auto; /* Optioneel: voeg koppeltekens toe */
+}
+
 
 /* Button */
 .button-container { text-align: center; margin-top: 30px; }
@@ -65,30 +72,14 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 /* BMI Tabel */
 .bmi-table-container { padding: 20px; background-color: var(--light-blue-bg); border-radius: 8px; border: 1px solid var(--primary-blue); }
 .bmi-table-container h3 { color: var(--primary-blue-dark); margin-top: 0; }
-.bmi-table-container p { margin-bottom: 5px; /* Less margin before table wrap */}
-
-/* === NIEUW: Wrapper voor horizontaal scrollen === */
-.bmi-table-wrapper {
-    overflow-x: auto; /* Maakt horizontaal scrollen mogelijk */
-    margin-bottom: 15px; /* Ruimte onder de tabel */
-    -webkit-overflow-scrolling: touch; /* Vloeiend scrollen op iOS */
-    padding-bottom: 8px; /* Ruimte voor eventuele scrollbar */
-}
-/* Verberg scroll hint op desktop */
+.bmi-table-container p { margin-bottom: 5px; }
+.bmi-table-wrapper { overflow-x: auto; margin-bottom: 15px; -webkit-overflow-scrolling: touch; padding-bottom: 8px; }
 .mobile-scroll-hint { display: none; }
-
-.bmi-table-wrapper table {
-    width: 100%;
-    border-collapse: collapse;
-    /* margin: 15px 0; Removed, margin is on wrapper now */
-    font-size: 0.8em;
-    background-color: var(--white);
-    min-width: 600px; /* Forceer minimale breedte om scrollen te triggeren */
-}
+.bmi-table-wrapper table { width: 100%; border-collapse: collapse; font-size: 0.8em; background-color: var(--white); min-width: 600px; }
 .bmi-table-container th, .bmi-table-container td { border: 1px solid var(--border-color); padding: 5px; text-align: center; min-width: 25px; }
-.bmi-table-container thead th { background-color: #e0e0e0; font-weight: 600; position: sticky; top: 0; /* Laat header plakken bij scrollen */ z-index: 1; }
-.bmi-table-container thead th:first-child { background-color: #ccc; font-weight: 700; width: 35px; color: var(--text-dark); position: sticky; left: 0; /* Laat KG kolom plakken */ z-index: 2; } /* Higher z-index */
-.bmi-table-container tbody td:first-child { background-color: var(--white); color: var(--text-dark); font-weight: 600; text-align: center; position: sticky; left: 0; /* Laat KG kolom plakken */ z-index: 1; }
+.bmi-table-container thead th { background-color: #e0e0e0; font-weight: 600; position: sticky; top: 0; z-index: 1; }
+.bmi-table-container thead th:first-child { background-color: #ccc; font-weight: 700; width: 35px; color: var(--text-dark); position: sticky; left: 0; z-index: 2; }
+.bmi-table-container tbody td:first-child { background-color: var(--white); color: var(--text-dark); font-weight: 600; text-align: center; position: sticky; left: 0; z-index: 1; }
 .bmi-table-container tbody td:not(:first-child) { font-weight: 600; color: var(--white); }
 .bmi-normal { background-color: var(--success-green); }
 .bmi-overweight { background-color: var(--warning-orange); }
@@ -96,18 +87,17 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 .bmi-legend div { margin-bottom: 5px; font-size: 0.85em; display: flex; align-items: center; }
 .legend-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
 
-
 /* ===== PAGINA 2 Specifiek ===== */
 .score-display-section { text-align: center; padding: 20px; background-color: var(--light-blue-bg); border-radius: 8px; margin-bottom: 30px; }
 .score-display-section h2 { border-bottom: none; display: block; margin-bottom: 10px; }
 .final-score { font-size: 4em; font-weight: 700; color: var(--primary-blue-dark); margin: 10px 0; line-height: 1; }
 .score-interpretation-section h3 { text-align: center; border-bottom: none; margin-bottom: 25px; }
-.risicometer-container { display: flex; gap: 30px; align-items: stretch; }
-.risicometer { position: relative; width: 40px; min-height: 280px; margin-right: 20px; padding: 10px 0; }
+.risicometer-container { display: flex; gap: 30px; align-items: stretch; } /* Blijft flex op desktop */
+.risicometer { position: relative; width: 40px; min-height: 280px; margin-right: 20px; padding: 10px 0; flex-shrink: 0; /* Voorkom krimpen */ }
 .risicometer-bar { width: 100%; height: 100%; background: linear-gradient(to top, var(--danger-red), var(--warning-orange) 46.1%, var(--warning-orange) 50%, var(--success-green) 73.1%, var(--success-green)); border-radius: 20px; }
 .risicometer-marker { position: absolute; left: calc(100% + 10px); transform: translateY(-50%); font-size: 0.9em; font-weight: 600; background-color: var(--white); padding: 0 5px; color: var(--text-light); }
 .score-indicator { position: absolute; left: -25px; width: 20px; font-size: 1.5em; color: var(--primary-blue-dark); transform: translateY(-50%); transition: top 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); top: 100%; }
-.score-details { flex: 1; display: flex; flex-direction: column; justify-content: space-around; }
+.score-details { flex: 1; display: flex; flex-direction: column; justify-content: space-around; min-width: 0; /* Belangrijk voor flex item wrapping/shrinking */ }
 .score-category { padding: 15px; border: 2px dashed var(--border-color); margin-bottom: 15px; border-radius: 8px; transition: background-color 0.3s ease, border-color 0.3s ease; }
 .score-category:last-child { margin-bottom: 0; }
 .score-category strong { display: block; margin-bottom: 8px; font-size: 1.15em; color: var(--text-dark); }
@@ -123,7 +113,7 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 
 /* Placeholder styling */
 .placeholder { background-color: #e9ecef; border: 1px dashed #ced4da; color: #6c757d; display: flex; align-items: center; justify-content: center; border-radius: 4px; font-size: 0.8em; text-align: center; padding: 5px; }
-.small-placeholder { height: 50px; margin-top: 10px; }
+.small-placeholder { display: none; /* Verwijderd uit HTML, dus verbergen via CSS niet strikt nodig, maar voor de zekerheid */ }
 .icon-placeholder { width: 50px; height: 50px; margin: 0 auto 10px auto; border-radius: 50%; }
 .logo-placeholder { height: 40px; width: 120px; font-size: 0.9em; font-weight: bold; }
 
@@ -144,87 +134,88 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 
 /* ===== Responsive Aanpassingen & Mobile Optimizations ===== */
 
-/* --- Tablet & Small Laptop (Stack columns) --- */
+/* --- Tablet & Small Laptop --- */
 @media (max-width: 992px) {
-    .main-content-wrapper {
-        grid-template-columns: 1fr; /* Stapel form en BMI */
-        gap: 30px; /* Grotere verticale gap */
-    }
+    .main-content-wrapper { grid-template-columns: 1fr; gap: 30px; }
     .bmi-table-container { margin-top: 0; }
     .page { padding: 20px 25px; }
     .page-header { padding: 15px 25px; margin: -20px -25px 25px -25px; flex-direction: column; text-align: center; }
     .page-header h1 { font-size: 1.6em; margin-top: 10px; }
     #back-to-test-button { position: relative; display: block; margin: 15px auto 0 auto; left: auto; top: auto; transform: none; }
-    .risicometer-container { flex-direction: column; align-items: center; }
-    .risicometer { margin-right: 0; margin-bottom: 20px; width: 35px; min-height: 200px; }
+    .risicometer-container {
+        flex-direction: column; /* Stapel meter en tekst */
+        align-items: center; /* Centreer de meter */
+    }
+    .risicometer { margin-right: 0; margin-bottom: 30px; /* Meer ruimte onder meter */ width: 35px; min-height: 200px; }
     .risicometer-marker { left: calc(100% + 8px); }
     .score-indicator { left: -20px; }
-    .score-details { width: 100%; }
+    .score-details { width: 100%; /* Volle breedte voor tekst */ }
 }
 
 /* --- Smartphone --- */
 @media (max-width: 576px) {
     body { font-size: 15px; }
-    .page { padding: 15px; } /* Minder padding */
-    .page-header { padding: 15px; margin: -15px -15px 20px -15px; }
+    .page { padding: 15px; }
+    .page-header { padding: 15px; margin: -15px -15px 20px -15px;}
     .page-header h1 { font-size: 1.4em; }
-    .content-section h2, .content-section h3 { font-size: 1.3em; } /* Iets kleinere koppen */
-
-    /* Form optimalisaties */
+    .content-section h2, .content-section h3 { font-size: 1.3em; }
     .test-form-container fieldset { padding: 15px; margin-bottom: 20px; }
     .test-form-container legend { font-size: 1em; }
-    .test-form-container label {
-        padding: 12px 10px; /* Iets meer verticale padding voor tikken */
-        display: flex; /* Gebruik flex voor betere controle */
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-    }
-     .test-form-container label input[type="radio"] { margin-right: 8px; flex-shrink: 0; }
-     .test-form-container .points {
-        position: static; /* Geen absolute positionering */
-        transform: none;
-        margin-left: auto; /* Duw naar rechts */
-        padding: 1px 5px;
-        font-size: 0.85em;
-        flex-shrink: 0; /* Voorkom krimpen */
-        margin-top: 3px; /* Kleine marge als het wrapt */
-    }
+    .test-form-container label { padding: 12px 10px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+    .test-form-container label input[type="radio"] { margin-right: 8px; flex-shrink: 0; }
+    .test-form-container .points { position: static; transform: none; margin-left: auto; padding: 1px 5px; font-size: 0.85em; flex-shrink: 0; margin-top: 3px; }
     .waist-columns { flex-direction: column; gap: 15px; }
-
-    /* Knop optimalisatie */
-    #calculate-button { padding: 12px 20px; font-size: 1em; width: 100%; /* Volle breedte */}
-    #back-to-test-button { width: auto; padding: 8px 15px;} /* Terug knop niet volle breedte */
-
-    /* Resultaten optimalisatie */
+    #calculate-button { padding: 12px 20px; font-size: 1em; width: 100%; }
+    #back-to-test-button { width: auto; padding: 8px 15px;}
     .final-score { font-size: 3em; }
-    .score-category { padding: 10px; }
+
+    /* == Fix 4: Score Interpretatie Mobile Layout == */
+    .risicometer-container {
+        /* Behoud flex-direction: column; align-items: center; van 992px breakpoint */
+        gap: 0; /* Geen gap nodig als gestapeld */
+    }
+    .risicometer {
+        min-height: 180px; /* Mag iets korter */
+        margin-bottom: 25px; /* Ruimte onder de meter */
+        /* Zorg dat de balk zichtbaar is */
+        display: block; /* Of flex, maar block is simpeler hier */
+    }
+    .risicometer-bar {
+         display: block; /* Zorg dat het gerenderd wordt */
+         /* height: 100%; is al gezet, zou moeten werken als parent (.risicometer) hoogte heeft */
+    }
+    .score-details {
+        display: block; /* Geen flex meer nodig hier, gewoon onder elkaar */
+        width: 100%;
+    }
+    .score-category {
+        padding: 10px;
+        margin-bottom: 10px; /* Iets minder ruimte tussen categorieën */
+    }
     .score-category strong { font-size: 1.1em; }
     .score-category p { font-size: 0.9em; }
-    .risicometer { min-height: 180px; }
 
-    /* Grid stacking */
+
     .advice-grid, .info-grid { grid-template-columns: 1fr; gap: 15px; }
     .advice-item p { font-size: 0.85em;}
 
-    /* === BMI Tabel Mobile Specific === */
+    /* == Fix 3: BMI Tabel Mobile Scroll & Layout == */
     .bmi-table-container p { font-size: 0.9em; }
-    /* Toon de scroll hint alleen op mobiel */
     .mobile-scroll-hint { display: inline; font-style: italic; font-size: 0.9em; color: var(--text-light); }
     .bmi-table-wrapper {
-         /* Scroll wrapper is al gedefinieerd, geen extra styles hier nodig tenzij override */
-         border: 1px solid var(--primary-blue); /* Duidelijkere rand op mobiel */
+         overflow-x: auto; /* Verzeker dat dit aan staat */
+         border: 1px solid var(--primary-blue);
          border-radius: 4px;
+         box-shadow: inset -10px 0px 8px -8px rgba(0,0,0,0.1); /* Kleine schaduw als hint */
     }
     .bmi-table-wrapper table {
-        font-size: 0.75em; /* Nog iets kleiner voor meer zichtbaarheid */
-        min-width: 550px; /* Pas eventueel aan obv test */
+        font-size: 0.75em;
+        min-width: 550px; /* Houd een min-width */
     }
-    .bmi-table-container th, .bmi-table-container td { padding: 4px 3px; /* Kleinere padding */ }
-    /* Zorg dat sticky headers/kolom werken op mobiel */
-    .bmi-table-container thead th { position: sticky; top: 0; z-index: 1; }
-    .bmi-table-container thead th:first-child,
-    .bmi-table-container tbody td:first-child { position: sticky; left: 0; z-index: 1; }
-     .bmi-table-container thead th:first-child { z-index: 2; } /* Header kg boven data kg */
+    .bmi-table-container th, .bmi-table-container td { padding: 4px 3px; }
+    /* Sticky positionering opnieuw toepassen/controleren */
+    .bmi-table-container thead th { position: sticky; top: 0; z-index: 1; background-color: #e0e0e0; /* Zorg voor achtergrond */ }
+    .bmi-table-container thead th:first-child { position: sticky; left: 0; z-index: 2; background-color: #ccc; /* Zorg voor achtergrond */ }
+    .bmi-table-container tbody td:first-child { position: sticky; left: 0; z-index: 1; background-color: var(--white); /* Zorg voor achtergrond */ }
 
 }
