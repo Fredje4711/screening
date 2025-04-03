@@ -27,10 +27,34 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* ===== Headers & Footers ===== */
-.page-header { background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark)); color: var(--white); padding: 20px 40px; margin: -30px -40px 30px -40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 4px solid var(--primary-blue-dark); }
-.page-header h1 { font-size: 1.8em; margin: 0; word-break: break-word; }
-.logo-placeholder { font-weight: bold; font-size: 1.2em; opacity: 0.8; }
-.result-header { position: relative; }
+.page-header {
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
+    color: var(--white);
+    padding: 20px 40px;
+    margin: -30px -40px 30px -40px;
+    display: flex; /* Essentieel voor naast elkaar */
+    align-items: center; /* Lijnt verticaal uit */
+    justify-content: space-between; /* Logo links, titel rechts */
+    border-bottom: 4px solid var(--primary-blue-dark);
+    flex-wrap: wrap; /* Laat titel eventueel onder logo wrappen */
+    gap: 15px; /* Ruimte tussen logo en titel indien ze wrappen */
+}
+.page-header h1 {
+    font-size: 1.8em;
+    margin: 0; /* Verwijder default margin */
+    word-break: break-word;
+    flex-grow: 1; /* Laat titel beschikbare ruimte nemen */
+    text-align: right; /* Lijn titel rechts uit (als er ruimte is) */
+}
+/* Logo styling (vervang .logo-placeholder) */
+.header-logo {
+    height: 80px; /* Stel de gewenste hoogte in */
+    width: auto;  /* Automatische breedte */
+    max-width: 250px; /* Max breedte */
+    flex-shrink: 0; /* Voorkom dat logo krimpt */
+}
+
+.result-header { position: relative; } /* Voor terugknop */
 .page-footer { text-align: center; margin-top: 30px; padding-top: 15px; border-top: 1px solid var(--border-color); font-size: 0.85em; color: var(--text-light); }
 
 /* ===== Algemene Sectiestijlen ===== */
@@ -79,7 +103,6 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 .bmi-result-display { text-align: center; font-size: 1.1em; font-weight: 600; padding: 15px; background-color: var(--white); border: 1px dashed var(--primary-blue); border-radius: 4px; margin-bottom: 10px; min-height: 50px; line-height: 1.3; }
 #bmi-value { font-weight: 700; color: var(--primary-blue-dark); }
 #bmi-category { font-weight: 700; }
-/* Kleuren voor BMI categorie */
 .bmi-cat-normal { color: var(--success-green); }
 .bmi-cat-overweight { color: var(--warning-orange); }
 .bmi-cat-obese { color: var(--danger-red); }
@@ -113,9 +136,11 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 
 /* Placeholder styling */
 .placeholder { background-color: #e9ecef; border: 1px dashed #ced4da; color: #6c757d; display: flex; align-items: center; justify-content: center; border-radius: 4px; font-size: 0.8em; text-align: center; padding: 5px; }
-.small-placeholder { display: none; }
+.small-placeholder { display: none; } /* Blijft verborgen */
 .icon-placeholder { width: 50px; height: 50px; margin: 0 auto 10px auto; border-radius: 50%; }
-.logo-placeholder { height: 40px; width: 120px; font-size: 0.9em; font-weight: bold; }
+.logo-placeholder { /* Deze wordt niet meer gebruikt als je <img> gebruikt */
+    display: none;
+}
 
 /* Algemene Info */
 .general-info-section h3 { text-align: center; border-bottom: none; margin-bottom: 25px; }
@@ -139,8 +164,9 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
     .main-content-wrapper { grid-template-columns: 1fr; gap: 30px; }
     .bmi-calculator-container { margin-top: 0; }
     .page { padding: 20px 25px; }
-    .page-header { padding: 15px 25px; margin: -20px -25px 25px -25px; flex-direction: column; text-align: center; }
-    .page-header h1 { font-size: 1.6em; margin-top: 10px; }
+    .page-header { padding: 15px 25px; margin: -20px -25px 25px -25px; flex-direction: column; text-align: center; gap: 10px; /* Ruimte bij stapelen */ }
+    .page-header h1 { font-size: 1.6em; margin-top: 0; /* Geen extra marge nodig met gap */ text-align: center; /* Centreer titel bij stapelen */ }
+    .header-logo { margin: 0 auto; /* Centreer logo bij stapelen */ }
     #back-to-test-button { position: relative; display: block; margin: 15px auto 0 auto; left: auto; top: auto; transform: none; }
 
     /* Tablet Score Interpretatie Layout (Robuuster: Block layout) */
@@ -157,29 +183,27 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 @media (max-width: 576px) {
     body { font-size: 15px; }
     .page { padding: 15px; }
-    .page-header { padding: 15px; margin: -15px -15px 20px -15px;}
+    .page-header { padding: 15px; margin: -15px -15px 20px -15px; } /* Behoud flex/column van 992px */
     .page-header h1 { font-size: 1.4em; }
+    .header-logo { height: 40px; max-width: 120px; } /* Kleiner logo */
+
     .content-section h2, .content-section h3 { font-size: 1.3em; }
 
     /* Form optimalisaties */
     .test-form-container fieldset { padding: 15px; margin-bottom: 20px; }
     .test-form-container legend { font-size: 1em; }
-    /* == AANPASSING: Label layout fix == */
     .test-form-container label {
         padding: 12px 10px;
-        display: flex; /* Blijft flex */
-        flex-wrap: wrap; /* Blijft wrappen */
-        align-items: center; /* Blijft centreren verticaal */
-        /* justify-content: space-between; */ /* VERWIJDERD! */
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        /* justify-content: space-between; */ /* VERWIJDERD voor fix spatie */
     }
-    .test-form-container label input[type="radio"] {
-        margin-right: 8px; /* Behoud ruimte na radio */
-        flex-shrink: 0;
-    }
+    .test-form-container label input[type="radio"] { margin-right: 8px; flex-shrink: 0; }
     .test-form-container .points {
-        position: static; /* Behoud static */
-        transform: none; /* Behoud none */
-        margin-left: auto; /* Laat dit de punten naar rechts duwen */
+        position: static;
+        transform: none;
+        margin-left: auto; /* Duwt naar rechts */
         padding: 1px 5px;
         font-size: 0.85em;
         flex-shrink: 0;
@@ -190,7 +214,7 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 
     /* Knop optimalisatie */
     #calculate-button { padding: 12px 20px; font-size: 1em; width: 100%; }
-    #back-to-test-button { width: auto; padding: 8px 15px;}
+    #back-to-test-button { width: auto; padding: 8px 15px; position: static; /* Geen absolute positie meer */ display: block; margin: 20px auto 0; transform: none; } /* Centreer onderaan */
 
     /* Resultaten optimalisatie */
     .final-score { font-size: 3em; }
@@ -214,13 +238,7 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
     .bmi-calculator-container { padding: 15px; }
     .bmi-calculator-container h3 { font-size: 1.2em; margin-bottom: 15px; }
     .calculator-form label { font-size: 0.9em;}
-    .calculator-form input[type="number"] {
-        padding: 12px 10px; /* Grotere padding */
-        font-size: 1em; /* Groter font */
-    }
-    #calculate-bmi-button {
-        padding: 12px 15px; /* Grotere padding */
-        font-size: 1em; /* Groter font */
-    }
+    .calculator-form input[type="number"] { padding: 12px 10px; font-size: 1em; } /* Groter */
+    #calculate-bmi-button { padding: 12px 15px; font-size: 1em; } /* Groter */
     .bmi-result-display { font-size: 1em; padding: 10px; }
 }
