@@ -17,34 +17,99 @@
         <section id="page1" class="page visible">
 
             <header class="page-header">
+                <!-- Jouw logo bestandsnaam is gebruikt -->
                 <img src="logo_screening.png" alt="Logo Risico Analyse" class="header-logo">
                 <h1>Diabetes Risico Analyse</h1>
             </header>
 
-             <section class="content-section intro-section"> <h2>WAT IS DIABETES?</h2> <p>Diabetes is een chronische aandoening waarbij je bloedsuikergehalte te hoog is. 1 op de 10 volwassen Belgen heeft diabetes.</p> <p>Diabetes verhoogt je risico op een hartinfarct, trombose, nier- en oogproblemen, zeker als de aandoening pas laattijdig ontdekt wordt. Als je er vroeg bij bent en goed behandelt kun je deze verwikkelingen voorkomen.</p> <p>Type 2 diabetes is de meestvoorkomende vorm (90%) en treedt vooral op vanaf 40 jaar. Aan erfelijke aanleg en leeftijd kun je niks veranderen, andere risicofactoren als overgewicht, roken, te weinig bewegen en ongezonde voeding kun je wel aanpakken. Type 1 diabetes (10%), start meestal op jonge leeftijd en kun je niet voorkomen.</p> </section>
-             <section class="content-section test-intro-section"> <h2>TEST JOUW RISICO OP TYPE 2 DIABETES</h2> <p>Met deze test bereken je je eigen risico op type 2 diabetes. Beantwoord alle 8 vragen hieronder om je risicoscore te bepalen.</p> </section>
+             <section class="content-section intro-section">
+                 <h2>WAT IS DIABETES?</h2>
+                 <p>Diabetes is een chronische aandoening waarbij je bloedsuikergehalte te hoog is. 1 op de 10 volwassen Belgen heeft diabetes.</p>
+                 <p>Diabetes verhoogt je risico op een hartinfarct, trombose, nier- en oogproblemen, zeker als de aandoening pas laattijdig ontdekt wordt. Als je er vroeg bij bent en goed behandelt kun je deze verwikkelingen voorkomen.</p>
+                 <p>Type 2 diabetes is de meestvoorkomende vorm (90%) en treedt vooral op vanaf 40 jaar. Aan erfelijke aanleg en leeftijd kun je niks veranderen, andere risicofactoren als overgewicht, roken, te weinig bewegen en ongezonde voeding kun je wel aanpakken. Type 1 diabetes (10%), start meestal op jonge leeftijd en kun je niet voorkomen.</p>
+            </section>
+             <section class="content-section test-intro-section">
+                 <h2>TEST JOUW RISICO OP TYPE 2 DIABETES</h2>
+                 <p>Met deze test bereken je je eigen risico op type 2 diabetes. Beantwoord alle 8 vragen hieronder om je risicoscore te bepalen.</p>
+            </section>
 
             <div class="main-content-wrapper">
 
                 <!-- Test Formulier Kolom -->
                 <div class="test-form-container">
                     <form id="diabetes-risk-form">
-                         <fieldset data-question-id="1"> <legend>1. Leeftijd</legend> <p>Hoe oud ben je?</p> <label><input type="radio" name="leeftijd" value="0"> Jonger dan 45 jaar <span class="points">0 p.</span></label> <label><input type="radio" name="leeftijd" value="2"> Tussen 45 en 54 jaar <span class="points">2 p.</span></label> <label><input type="radio" name="leeftijd" value="3"> Tussen 55 en 64 jaar <span class="points">3 p.</span></label> <label><input type="radio" name="leeftijd" value="4"> 65 jaar of ouder <span class="points">4 p.</span></label> </fieldset>
-                         <fieldset data-question-id="2"> <legend>2. Gewicht (BMI)</legend> <p>Hoe hoog is je BMI?¹</p> <label><input type="radio" name="gewicht" value="0" id="bmi-cat-normal-radio"> Lager dan 25 (normaal) <span class="points">0 p.</span></label> <label><input type="radio" name="gewicht" value="1" id="bmi-cat-overweight-radio"> Tss 25 en 30 (overgewicht) <span class="points">1 p.</span></label> <label><input type="radio" name="gewicht" value="3" id="bmi-cat-obese-radio"> Meer dan 30 (obesitas) <span class="points">3 p.</span></label> <small>¹ Bereken je BMI onderaan.</small> </fieldset>
-                         <fieldset data-question-id="3"> <legend>3. Buikomtrek</legend> <p>Wat is je buikomtrek?²</p> <div class="waist-columns"> <div> <strong>Vrouw</strong> <label><input type="radio" name="buikomtrek" value="0"> < 80 cm <span class="points">0 p.</span></label> <label><input type="radio" name="buikomtrek_vrouw" data-gender-points="3"> 80-88 cm <span class="points">3 p.</span></label> <label><input type="radio" name="buikomtrek_vrouw" data-gender-points="4"> > 88 cm <span class="points">4 p.</span></label> </div> <div> <strong>Man</strong> <label><input type="radio" name="buikomtrek" value="0"> < 94 cm <span class="points">0 p.</span></label> <label><input type="radio" name="buikomtrek_man" data-gender-points="3"> 94-102 cm <span class="points">3 p.</span></label> <label><input type="radio" name="buikomtrek_man" data-gender-points="4"> > 102 cm <span class="points">4 p.</span></label> </div> </div> <small>² Meet rond de taille, tussen ribben en heup.</small> </fieldset>
-                         <fieldset data-question-id="4"> <legend>4. Beweging</legend> <p>Beweeg je dagelijks minstens 30 min.?</p> <label><input type="radio" name="beweging" value="0"> Ja <span class="points">0 p.</span></label> <label><input type="radio" name="beweging" value="2"> Neen <span class="points">2 p.</span></label> </fieldset>
-                         <fieldset data-question-id="5"> <legend>5. Gezonde Voeding</legend> <p>Eet je dagelijks groenten en fruit?</p> <label><input type="radio" name="voeding" value="0"> Ja <span class="points">0 p.</span></label> <label><input type="radio" name="voeding" value="1"> Neen <span class="points">1 p.</span></label> </fieldset>
-                         <fieldset data-question-id="6"> <legend>6. Bloeddruk</legend>
-                             <!-- Fix 1: Tekst gesplitst met <br> -->
-                             <p>Gebruik(te) je medicatie tegen hoge bloeddruk?</p>
-                             <label><input type="radio" name="bloeddruk" value="2"> Ja <span class="points">2 p.</span></label> <label><input type="radio" name="bloeddruk" value="0"> Neen <span class="points">0 p.</span></label>
+                         <fieldset data-question-id="1">
+                             <legend>1. Leeftijd</legend>
+                             <p>Hoe oud ben je?</p>
+                             <label><input type="radio" name="leeftijd" value="0"> Jonger dan 45 jaar <span class="points">0 p.</span></label>
+                             <label><input type="radio" name="leeftijd" value="2"> Tussen 45 en 54 jaar <span class="points">2 p.</span></label>
+                             <label><input type="radio" name="leeftijd" value="3"> Tussen 55 en 64 jaar <span class="points">3 p.</span></label>
+                             <label><input type="radio" name="leeftijd" value="4"> 65 jaar of ouder <span class="points">4 p.</span></label>
                          </fieldset>
-                         <fieldset data-question-id="7"> <legend>7. Bloedsuikerwaarde</legend>
-                              <!-- Fix 1: Tekst gesplitst met <br> -->
-                             <p>Werd ooit een verhoogde bloedsuiker vastgesteld?</p>
-                             <label><input type="radio" name="bloedsuiker" value="5"> Ja <span class="points">5 p.</span></label> <label><input type="radio" name="bloedsuiker" value="0"> Neen <span class="points">0 p.</span></label>
+                         <fieldset data-question-id="2">
+                             <legend>2. Gewicht (BMI)</legend>
+                             <p>Hoe hoog is je BMI?¹</p>
+                             <!-- Jouw tekst is behouden -->
+                             <label><input type="radio" name="gewicht" value="0" id="bmi-cat-normal-radio"> Lager dan 25 (normaal) <span class="points">0 p.</span></label>
+                             <label><input type="radio" name="gewicht" value="1" id="bmi-cat-overweight-radio"> Tss 25 en 30 (overgewicht) <span class="points">1 p.</span></label>
+                             <label><input type="radio" name="gewicht" value="3" id="bmi-cat-obese-radio"> Meer dan 30 (obesitas) <span class="points">3 p.</span></label>
+                             <!-- Jouw tekst is behouden -->
+                             <small>¹ Bereken je BMI onderaan.</small>
                          </fieldset>
-                         <fieldset data-question-id="8"> <legend>8. Erfelijkheid</legend> <p>Heeft een naast familielid diabetes?</p> <label><input type="radio" name="erfelijkheid" value="0"> Neen <span class="points">0 p.</span></label> <label><input type="radio" name="erfelijkheid" value="3"> Ja, geen ouder/broer/zus/kind <span class="points">3 p.</span></label> <label><input type="radio" name="erfelijkheid" value="5"> Ja, ouder/broer/zus/kind <span class="points">5 p.</span></label> </fieldset>
+                         <fieldset data-question-id="3">
+                             <legend>3. Buikomtrek</legend>
+                             <p>Wat is je buikomtrek?²</p>
+                             <div class="waist-columns">
+                                 <div>
+                                     <strong>Vrouw</strong>
+                                     <label><input type="radio" name="buikomtrek" value="0"> < 80 cm <span class="points">0 p.</span></label>
+                                     <label><input type="radio" name="buikomtrek_vrouw" data-gender-points="3"> 80-88 cm <span class="points">3 p.</span></label>
+                                     <label><input type="radio" name="buikomtrek_vrouw" data-gender-points="4"> > 88 cm <span class="points">4 p.</span></label>
+                                 </div>
+                                 <div>
+                                     <strong>Man</strong>
+                                     <label><input type="radio" name="buikomtrek" value="0"> < 94 cm <span class="points">0 p.</span></label>
+                                     <label><input type="radio" name="buikomtrek_man" data-gender-points="3"> 94-102 cm <span class="points">3 p.</span></label>
+                                     <label><input type="radio" name="buikomtrek_man" data-gender-points="4"> > 102 cm <span class="points">4 p.</span></label>
+                                 </div>
+                             </div>
+                              <!-- Jouw tekst is behouden -->
+                             <small>² Meet rond de taille, tussen ribben en heup.</small>
+                         </fieldset>
+                         <fieldset data-question-id="4">
+                             <legend>4. Beweging</legend>
+                             <p>Beweeg je dagelijks minstens 30 min.?</p>
+                             <label><input type="radio" name="beweging" value="0"> Ja <span class="points">0 p.</span></label>
+                             <label><input type="radio" name="beweging" value="2"> Neen <span class="points">2 p.</span></label>
+                         </fieldset>
+                         <fieldset data-question-id="5">
+                             <legend>5. Gezonde Voeding</legend>
+                             <p>Eet je dagelijks groenten en fruit?</p>
+                             <label><input type="radio" name="voeding" value="0"> Ja <span class="points">0 p.</span></label>
+                             <label><input type="radio" name="voeding" value="1"> Neen <span class="points">1 p.</span></label>
+                         </fieldset>
+                         <fieldset data-question-id="6">
+                             <legend>6. Bloeddruk</legend>
+                             <!-- <br> tag opnieuw toegevoegd -->
+                             <p>Gebruik(te) je medicatie<br>tegen hoge bloeddruk?</p>
+                             <label><input type="radio" name="bloeddruk" value="2"> Ja <span class="points">2 p.</span></label>
+                             <label><input type="radio" name="bloeddruk" value="0"> Neen <span class="points">0 p.</span></label>
+                         </fieldset>
+                         <fieldset data-question-id="7">
+                             <legend>7. Bloedsuikerwaarde</legend>
+                              <!-- <br> tag opnieuw toegevoegd -->
+                             <p>Werd ooit een verhoogde<br>bloedsuiker vastgesteld?</p>
+                             <label><input type="radio" name="bloedsuiker" value="5"> Ja <span class="points">5 p.</span></label>
+                             <label><input type="radio" name="bloedsuiker" value="0"> Neen <span class="points">0 p.</span></label>
+                         </fieldset>
+                         <fieldset data-question-id="8">
+                             <legend>8. Erfelijkheid</legend>
+                             <p>Heeft een naast familielid diabetes?</p>
+                              <!-- Jouw tekst is behouden -->
+                             <label><input type="radio" name="erfelijkheid" value="0"> Neen <span class="points">0 p.</span></label>
+                             <label><input type="radio" name="erfelijkheid" value="3"> Ja, geen ouder/broer/zus/kind <span class="points">3 p.</span></label>
+                             <label><input type="radio" name="erfelijkheid" value="5"> Ja, ouder/broer/zus/kind <span class="points">5 p.</span></label>
+                         </fieldset>
 
                          <div class="button-container">
                             <button type="button" id="calculate-button" disabled>Bereken Totaal & Bekijk Resultaat</button>
@@ -52,7 +117,7 @@
                     </form>
                 </div>
 
-                <!-- === Fix 3: BMI Calculator ipv Tabel === -->
+                <!-- BMI Calculator Kolom -->
                 <aside class="bmi-calculator-container">
                     <h3>Bereken BMI</h3>
                     <div class="calculator-form">
@@ -68,10 +133,10 @@
                         <div id="bmi-result" class="bmi-result-display">
                             Uw BMI: <span id="bmi-value">--</span> (<span id="bmi-category">--</span>)
                         </div>
+                         <!-- Jouw tekst is behouden -->
                          <p class="bmi-instruction">Gebruik deze waarde voor vraag 2.</p>
                     </div>
                 </aside>
-                 <!-- === EINDE Fix 3 === -->
 
             </div> <!-- Einde main-content-wrapper -->
 
@@ -81,10 +146,17 @@
         <!-- ===== PAGINA 2: Resultaat, Advies & Info ===== -->
         <section id="page2" class="page hidden">
 
-             <header class="page-header result-header"> <h1>Jouw Resultaat & Advies</h1> <button type="button" id="back-to-test-button" title="Terug naar de test">← Terug</button> </header>
-             <section class="content-section score-display-section"> <h2>Jouw Risicoscore</h2> <div class="final-score" id="final-score-display">-- p.</div> <p>Deze score geeft een indicatie van je risico op type 2 diabetes.</p> </section>
+             <header class="page-header result-header">
+                 <h1>Jouw Resultaat & Advies</h1>
+                 <button type="button" id="back-to-test-button" title="Terug naar de test">← Terug</button>
+            </header>
 
-            <!-- === Fix 4: Score Interpretatie (CSS regelt mobiele weergave) === -->
+            <section class="content-section score-display-section">
+                 <h2>Jouw Risicoscore</h2>
+                 <div class="final-score" id="final-score-display">-- p.</div>
+                 <p>Deze score geeft een indicatie van je risico op type 2 diabetes.</p>
+            </section>
+
             <section class="content-section score-interpretation-section">
                  <h3>Wat betekent jouw score?</h3>
                  <div class="risicometer-container">
@@ -97,17 +169,82 @@
                         <div id="score-indicator" class="score-indicator">▲</div>
                     </div>
                     <div class="score-details">
-                        <div id="score-range-0-6" class="score-category"> <strong>0 - 6 PUNTEN: Laag Risico</strong> <p>Je hebt momenteel een laag risico. Blijf gezond eten, voldoende bewegen (30 min/dag) en houd een gezond gewicht (BMI < 25). Herhaal deze test elke 3 jaar.</p> </div>
-                        <div id="score-range-7-11" class="score-category"> <strong>7 - 11 PUNTEN: Licht Verhoogd Risico</strong> <p>Je hebt een licht verhoogd risico. Focus op gezonde voeding, dagelijkse beweging (30 min), vermijd lang stilzitten. Als je BMI ≥ 25 is, probeer dan 5% af te vallen. Herhaal deze test elke 3 jaar.</p> </div>
-                        <div id="score-range-12plus" class="score-category"> <strong>≥ 12 PUNTEN: Sterk Verhoogd Risico</strong> <p>Je hebt een sterk verhoogd risico. Neem contact op met je huisarts voor een nuchtere bloedafname (suiker, vetten). Bespreek ook andere risicofactoren (roken, overgewicht, bloeddruk) en mogelijke volgende stappen.</p> </div>
+                        <div id="score-range-0-6" class="score-category">
+                            <strong>0 - 6 PUNTEN: Laag Risico</strong>
+                            <p>Je hebt momenteel een laag risico. Blijf gezond eten, voldoende bewegen (30 min/dag) en houd een gezond gewicht (BMI < 25). Herhaal deze test elke 3 jaar.</p>
+                        </div>
+                         <div id="score-range-7-11" class="score-category">
+                            <strong>7 - 11 PUNTEN: Licht Verhoogd Risico</strong>
+                            <p>Je hebt een licht verhoogd risico. Focus op gezonde voeding, dagelijkse beweging (30 min), vermijd lang stilzitten. Als je BMI ≥ 25 is, probeer dan 5% af te vallen. Herhaal deze test elke 3 jaar.</p>
+                        </div>
+                        <div id="score-range-12plus" class="score-category">
+                            <strong>≥ 12 PUNTEN: Sterk Verhoogd Risico</strong>
+                            <p>Je hebt een sterk verhoogd risico. Neem contact op met je huisarts voor een nuchtere bloedafname (suiker, vetten). Bespreek ook andere risicofactoren (roken, overgewicht, bloeddruk) en mogelijke volgende stappen.</p>
+                        </div>
                     </div>
-                 </div>
+                </div>
             </section>
-             <!-- === EINDE Fix 4 === -->
+			
+            <section class="content-section risk-reduction-section">
+                <h3>Verminder je Risico op Type 2 Diabetes</h3>
+                <div class="advice-grid">
+                    <div class="advice-item">
+                         <!-- AANGEPAST: Verwijst nu naar .png -->
+                         <img src="icon-eten.png" alt="Gezond eten icoon" class="advice-icon">
+                         <h4>EET GEZOND EN GEVARIEERD</h4>
+                         <p>1. Neem plantaardige producten als basis [... etc.]</p>
+                     </div>
+                     <div class="advice-item">
+                          <!-- AANGEPAST: Verwijst nu naar .png -->
+                          <img src="icon-gewicht.png" alt="Gewicht icoon" class="advice-icon">
+                         <h4>STREEF NAAR EEN GEZOND LICHAAMSGEWICHT</h4>
+                         <p>Overgewicht? Bij een daling van je lichaamsgewicht [... etc.]</p>
+                     </div>
+                      <div class="advice-item">
+                           <!-- AANGEPAST: Verwijst nu naar .png -->
+                         <img src="icon-bewegen.png" alt="Bewegen icoon" class="advice-icon">
+                         <h4>BEWEEG VOLDOENDE EN VERMIJD LANG STILZITTEN</h4>
+                         <p>Met 30 min. lichaamsbeweging per dag [... etc.]</p>
+                     </div>
+                     <div class="advice-item">
+                           <!-- AANGEPAST: Verwijst nu naar .png -->
+                          <img src="icon-stoproken.png" alt="Stop roken icoon" class="advice-icon">
+                          <h4>STOP MET ROKEN</h4>
+                         <p>Ondanks eventuele gewichtstoename helpt stoppen [... etc.]</p>
+                     </div>
+                </div>
+            </section>
 
-            <section class="content-section risk-reduction-section"> <h3>Verminder je Risico op Type 2 Diabetes</h3> <div class="advice-grid"> <div class="advice-item"> <div class="placeholder icon-placeholder">[Icon: Gezond Eten]</div> <h4>EET GEZOND EN GEVARIEERD</h4> <p>1. Neem plantaardige producten als basis voor elke maaltijd. Beperk inname van dierlijke producten.<br>2. Drink vooral water.<br>3. Kies zo weinig mogelijk voor ultrabewerkte producten.</p> </div> <div class="advice-item"> <div class="placeholder icon-placeholder">[Icon: Weegschaal]</div> <h4>STREEF NAAR EEN GEZOND LICHAAMSGEWICHT</h4> <p>Overgewicht? Bij een daling van je lichaamsgewicht met 5%, daalt het diabetesrisico met 30%.</p> </div> <div class="advice-item"> <div class="placeholder icon-placeholder">[Icon: Lopend Figuur]</div> <h4>BEWEEG VOLDOENDE EN VERMIJD LANG STILZITTEN</h4> <p>Met 30 min. lichaamsbeweging per dag vermindert het diabetesrisico met 30%. Elke stap telt.</p> </div> <div class="advice-item"> <div class="placeholder icon-placeholder">[Icon: Stop Roken]</div> <h4>STOP MET ROKEN</h4> <p>Ondanks eventuele gewichtstoename helpt stoppen met roken type 2 diabetes te voorkomen.</p> </div> </div> </section>
-            <section class="content-section general-info-section"> <h3>Algemene Informatie</h3> <div class="info-grid"> <div class="info-block"> <h4>Diabetes Cijfers</h4> <p><strong>1 op 10</strong> Belgen heeft diabetes.</p> <p><strong>1 op 3</strong> weet dit niet.</p> </div> <div class="info-block"> <h4>Doe de Test Online</h4> <p>Vind deze test en meer info op:</p> <a href="https://www.gezondheidskompas.be" target="_blank" rel="noopener noreferrer">www.gezondheidskompas.be</a> </div> <div class="info-block"> <h4>Gezonde Leefstijl</h4> <p>Halveer je risico door gezond te leven. Praat erover met je arts of apotheker.</p> </div> </div> <div class="logos"> <div class="placeholder logo-placeholder">[Logo Diabetes Liga]</div> <div class="placeholder logo-placeholder">[Logo Vlaanderen]</div> </div> </section>
-            <footer class="page-footer"> <p>© 2025 Diabetes Liga Midden-Limburg.</p><a href="https://www.dlml.be" target="_blank" rel="noopener noreferrer">www.dlml.be</a></footer>
+             <section class="content-section general-info-section">
+                 <h3>Algemene Informatie</h3>
+                 <div class="info-grid">
+                     <div class="info-block">
+                         <h4>Diabetes Cijfers</h4>
+                         <p><strong>1 op 10</strong> Belgen heeft diabetes.</p>
+                         <p><strong>1 op 3</strong> weet dit niet.</p>
+                     </div>
+                      <div class="info-block">
+                         <h4>Doe de Test Online</h4>
+                         <p>Vind deze test en meer info op:</p>
+                         <a href="https://www.gezondheidskompas.be" target="_blank" rel="noopener noreferrer">www.gezondheidskompas.be</a>
+                     </div>
+                      <div class="info-block">
+                         <h4>Gezonde Leefstijl</h4>
+                         <p>Halveer je risico door gezond te leven. Praat erover met je arts of apotheker.</p>
+                     </div>
+                      
+                </div>
+                 <div class="logos">
+                    <div class="placeholder logo-placeholder">[Logo Diabetes Liga]</div>
+                    <div class="placeholder logo-placeholder">[Logo Vlaanderen]</div>
+                </div>
+            </section>
+
+             <!-- Jouw aangepaste footer -->
+            <footer class="page-footer">
+                 <p>© 2025 Diabetes Liga Midden-Limburg.</p>
+                 <a href="https://www.dlml.be" target="_blank" rel="noopener noreferrer">www.dlml.be</a>
+            </footer>
 
         </section> <!-- Einde Page 2 -->
 

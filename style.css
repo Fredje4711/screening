@@ -32,30 +32,48 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
     color: var(--white);
     padding: 20px 40px;
     margin: -30px -40px 30px -40px;
-    display: flex; /* Essentieel voor naast elkaar */
-    align-items: center; /* Lijnt verticaal uit */
-    justify-content: space-between; /* Logo links, titel rechts */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     border-bottom: 4px solid var(--primary-blue-dark);
-    flex-wrap: wrap; /* Laat titel eventueel onder logo wrappen */
-    gap: 15px; /* Ruimte tussen logo en titel indien ze wrappen */
+    flex-wrap: wrap;
+    gap: 15px;
 }
 .page-header h1 {
     font-size: 1.8em;
-    margin: 0; /* Verwijder default margin */
+    margin: 0;
     word-break: break-word;
-    flex-grow: 1; /* Laat titel beschikbare ruimte nemen */
-    text-align: right; /* Lijn titel rechts uit (als er ruimte is) */
+    flex-grow: 1;
+    text-align: right;
 }
-/* Logo styling (vervang .logo-placeholder) */
-.header-logo {
-    height: 80px; /* Stel de gewenste hoogte in */
-    width: auto;  /* Automatische breedte */
-    max-width: 250px; /* Max breedte */
-    flex-shrink: 0; /* Voorkom dat logo krimpt */
+.header-logo { /* Styling voor het echte logo */
+    height: 50px;
+    width: auto;
+    max-width: 150px;
+    flex-shrink: 0;
+}
+.logo-placeholder { /* Alleen als fallback */
+    display: none; /* Verberg nu we .header-logo hebben */
+    font-weight: bold;
+    font-size: 1.2em;
+    opacity: 0.8;
+    flex-shrink: 0;
 }
 
-.result-header { position: relative; } /* Voor terugknop */
+.result-header { position: relative; }
 .page-footer { text-align: center; margin-top: 30px; padding-top: 15px; border-top: 1px solid var(--border-color); font-size: 0.85em; color: var(--text-light); }
+/* Styling voor de link in de footer */
+.page-footer a {
+    display: block; /* Zet op eigen regel */
+    margin-top: 5px;
+    color: var(--primary-blue);
+    text-decoration: none;
+}
+.page-footer a:hover {
+    text-decoration: underline;
+    color: var(--primary-blue-dark);
+}
+
 
 /* ===== Algemene Sectiestijlen ===== */
 .content-section { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); }
@@ -134,12 +152,23 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 .advice-item p { font-size: 0.9em; color: var(--text-light); margin-bottom: 0; line-height: 1.4; text-align: left; }
 .advice-item p br { margin-bottom: 4px; display: block; content: ""; }
 
-/* Placeholder styling */
+/* === Styling voor Advies Iconen === */
+.advice-icon {
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 15px auto;
+}
+
+/* Placeholder styling (algemeen, voor andere placeholders) */
 .placeholder { background-color: #e9ecef; border: 1px dashed #ced4da; color: #6c757d; display: flex; align-items: center; justify-content: center; border-radius: 4px; font-size: 0.8em; text-align: center; padding: 5px; }
-.small-placeholder { display: none; } /* Blijft verborgen */
-.icon-placeholder { width: 50px; height: 50px; margin: 0 auto 10px auto; border-radius: 50%; }
-.logo-placeholder { /* Deze wordt niet meer gebruikt als je <img> gebruikt */
-    display: none;
+.small-placeholder { display: none; }
+.icon-placeholder { display: none; } /* Verwijder styling nu we .advice-icon gebruiken */
+.logo-placeholder { /* Alleen voor fallback in header / algemene info */
+    height: 40px;
+    width: 120px;
+    font-size: 0.9em;
+    font-weight: bold;
 }
 
 /* Algemene Info */
@@ -150,7 +179,7 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 .info-block p { font-size: 0.9em; margin-bottom: 5px; }
 .info-block a { color: var(--primary-blue); font-weight: 600; text-decoration: none; word-break: break-all; }
 .info-block a:hover { color: var(--primary-blue-dark); text-decoration: underline; }
-.more-info-link { background-color: var(--primary-blue); }
+.more-info-link { background-color: var(--primary-blue); } /* Opnieuw toegevoegd */
 .more-info-link h4 { color: var(--white); }
 .more-info-link a { color: var(--white); display: block; padding: 8px 0; }
 .more-info-link a:hover { color: var(--light-blue-bg); text-decoration: none; }
@@ -164,9 +193,9 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
     .main-content-wrapper { grid-template-columns: 1fr; gap: 30px; }
     .bmi-calculator-container { margin-top: 0; }
     .page { padding: 20px 25px; }
-    .page-header { padding: 15px 25px; margin: -20px -25px 25px -25px; flex-direction: column; text-align: center; gap: 10px; /* Ruimte bij stapelen */ }
-    .page-header h1 { font-size: 1.6em; margin-top: 0; /* Geen extra marge nodig met gap */ text-align: center; /* Centreer titel bij stapelen */ }
-    .header-logo { margin: 0 auto; /* Centreer logo bij stapelen */ }
+    .page-header { padding: 15px 25px; margin: -20px -25px 25px -25px; flex-direction: column; text-align: center; gap: 10px; }
+    .page-header h1 { font-size: 1.6em; margin-top: 0; text-align: center; }
+    .header-logo { margin: 0 auto; }
     #back-to-test-button { position: relative; display: block; margin: 15px auto 0 auto; left: auto; top: auto; transform: none; }
 
     /* Tablet Score Interpretatie Layout (Robuuster: Block layout) */
@@ -183,9 +212,9 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 @media (max-width: 576px) {
     body { font-size: 15px; }
     .page { padding: 15px; }
-    .page-header { padding: 15px; margin: -15px -15px 20px -15px; } /* Behoud flex/column van 992px */
+    .page-header { padding: 15px; margin: -15px -15px 20px -15px;}
     .page-header h1 { font-size: 1.4em; }
-    .header-logo { height: 40px; max-width: 120px; } /* Kleiner logo */
+    .header-logo { height: 40px; max-width: 120px; }
 
     .content-section h2, .content-section h3 { font-size: 1.3em; }
 
@@ -197,7 +226,7 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        /* justify-content: space-between; */ /* VERWIJDERD voor fix spatie */
+        /* justify-content: space-between; /* VERWIJDERD */
     }
     .test-form-container label input[type="radio"] { margin-right: 8px; flex-shrink: 0; }
     .test-form-container .points {
@@ -214,7 +243,7 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
 
     /* Knop optimalisatie */
     #calculate-button { padding: 12px 20px; font-size: 1em; width: 100%; }
-    #back-to-test-button { width: auto; padding: 8px 15px; position: static; /* Geen absolute positie meer */ display: block; margin: 20px auto 0; transform: none; } /* Centreer onderaan */
+    #back-to-test-button { width: auto; padding: 8px 15px; position: static; display: block; margin: 20px auto 0; transform: none; }
 
     /* Resultaten optimalisatie */
     .final-score { font-size: 3em; }
@@ -233,12 +262,18 @@ body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-d
     /* Grid stacking */
     .advice-grid, .info-grid { grid-template-columns: 1fr; gap: 15px; }
     .advice-item p { font-size: 0.85em;}
+     /* Iconen op mobiel */
+    .advice-icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 10px;
+    }
 
     /* Smartphone BMI Calculator Layout */
     .bmi-calculator-container { padding: 15px; }
     .bmi-calculator-container h3 { font-size: 1.2em; margin-bottom: 15px; }
     .calculator-form label { font-size: 0.9em;}
-    .calculator-form input[type="number"] { padding: 12px 10px; font-size: 1em; } /* Groter */
-    #calculate-bmi-button { padding: 12px 15px; font-size: 1em; } /* Groter */
+    .calculator-form input[type="number"] { padding: 12px 10px; font-size: 1em; }
+    #calculate-bmi-button { padding: 12px 15px; font-size: 1em; }
     .bmi-result-display { font-size: 1em; padding: 10px; }
 }
