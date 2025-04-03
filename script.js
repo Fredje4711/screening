@@ -5,21 +5,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('diabetes-risk-form');
     const calculateButton = document.getElementById('calculate-button');
     const backButton = document.getElementById('back-to-test-button');
-
-    // BMI Calculator Elementen (Pagina 1)
     const heightInput = document.getElementById('height');
     const weightInput = document.getElementById('weight');
     const calculateBmiButton = document.getElementById('calculate-bmi-button');
     const bmiValueSpan = document.getElementById('bmi-value');
     const bmiCategorySpan = document.getElementById('bmi-category');
     const bmiResultDisplay = document.getElementById('bmi-result');
-
-    // Vraag 2 Radio Buttons (voor auto-select)
     const bmiRadioNormal = document.getElementById('bmi-cat-normal-radio');
     const bmiRadioOverweight = document.getElementById('bmi-cat-overweight-radio');
     const bmiRadioObese = document.getElementById('bmi-cat-obese-radio');
-
-    // Resultaat elementen (Pagina 2)
     const finalScoreDisplay = document.getElementById('final-score-display');
     const scoreIndicator = document.getElementById('score-indicator');
     const scoreCategories = document.querySelectorAll('.score-category');
@@ -29,13 +23,10 @@ document.addEventListener('DOMContentLoaded', function() {
     let calculatedScore = 0;
 
     // === Functies ===
-
-    // Controleer of alle *risico* vragen zijn beantwoord
     function checkAllQuestionsAnswered() {
         let answeredCount = 0;
         const fieldsets = form.querySelectorAll('fieldset[data-question-id]');
         fieldsets.forEach(fieldset => {
-            // Check of *enige* radio binnen de fieldset is aangevinkt
             if (fieldset.querySelector('input[type="radio"]:checked')) {
                  answeredCount++;
             }
@@ -43,9 +34,8 @@ document.addEventListener('DOMContentLoaded', function() {
         calculateButton.disabled = (answeredCount < totalQuestions);
     }
 
-    // Bereken de BMI
     function calculateAndDisplayBMI() {
-        console.log("calculateAndDisplayBMI called"); // Debug log
+        console.log("calculateAndDisplayBMI called");
         try {
             const heightCm = parseFloat(heightInput.value);
             const weightKg = parseFloat(weightInput.value);
@@ -56,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
             bmiResultDisplay.classList.remove('bmi-result-error');
 
             if (isNaN(heightCm) || isNaN(weightKg) || heightCm <= 0 || weightKg <= 0 || heightCm < 100 || heightCm > 250 || weightKg < 30 || weightKg > 300) {
-                console.log("Invalid BMI input"); // Debug log
+                console.log("Invalid BMI input");
                 bmiCategorySpan.textContent = 'Ongeldige invoer';
                 bmiCategorySpan.classList.add('bmi-cat-error');
                 bmiResultDisplay.classList.add('bmi-result-error');
@@ -68,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const heightM = heightCm / 100;
             const bmi = weightKg / (heightM * heightM);
             const bmiRounded = bmi.toFixed(1);
-            console.log("Calculated BMI:", bmiRounded); // Debug log
+            console.log("Calculated BMI:", bmiRounded);
 
             bmiValueSpan.textContent = bmiRounded;
 
@@ -88,83 +78,64 @@ document.addEventListener('DOMContentLoaded', function() {
 
             bmiCategorySpan.textContent = category;
             bmiCategorySpan.classList.add(categoryClass);
-
-            // Auto-select Vraag 2 radio
             [bmiRadioNormal, bmiRadioOverweight, bmiRadioObese].forEach(radio => { radio.checked = (radio === autoSelectRadio); });
-
-            form.dispatchEvent(new Event('change')); // Update hoofdknop status
+            form.dispatchEvent(new Event('change'));
 
         } catch (error) {
-            console.error("Error in calculateAndDisplayBMI:", error); // Log errors
+            console.error("Error in calculateAndDisplayBMI:", error);
             bmiCategorySpan.textContent = 'Fout bij berekenen';
             bmiCategorySpan.classList.add('bmi-cat-error');
             bmiResultDisplay.classList.add('bmi-result-error');
         }
     }
 
-
-    // === GECORRIGEERDE Score Berekening ===
     function calculateTotalRiskScore() {
         let score = 0;
-        console.log("--- Calculating Risk Score ---"); // Debug
-
-        // 1. Score van vragen 1, 2, 4, 5, 6, 7, 8 (NIET Buikomtrek)
+        console.log("--- Calculating Risk Score ---");
         const standardRadios = form.querySelectorAll(
             'input[name="leeftijd"]:checked, ' +
-            'input[name="gewicht"]:checked, ' + // Vraag 2 (BMI categorie)
+            'input[name="gewicht"]:checked, ' +
             'input[name="beweging"]:checked, ' +
             'input[name="voeding"]:checked, ' +
             'input[name="bloeddruk"]:checked, ' +
             'input[name="bloedsuiker"]:checked, ' +
             'input[name="erfelijkheid"]:checked'
         );
-
         standardRadios.forEach(radio => {
             const value = parseInt(radio.value, 10);
             if (!isNaN(value)) {
                 score += value;
-                console.log(`+${value} points from ${radio.name}`); // Debug
-            } else {
-                 console.warn(`NaN value found for ${radio.name}`); // Debug
-            }
+                console.log(`+${value} points from ${radio.name}`);
+            } else { console.warn(`NaN value found for ${radio.name}`); }
         });
 
-        // 2. Score van vraag 3 (Buikomtrek) expliciet
         const waistRadioGeneral = form.querySelector('input[name="buikomtrek"]:checked');
         const waistRadioVrouw = form.querySelector('input[name="buikomtrek_vrouw"]:checked');
         const waistRadioMan = form.querySelector('input[name="buikomtrek_man"]:checked');
-
         let waistValue = 0;
         if (waistRadioVrouw) {
             waistValue = parseInt(waistRadioVrouw.dataset.genderPoints, 10);
-            console.log(`Buikomtrek Vrouw selected: data-gender-points=${waistRadioVrouw.dataset.genderPoints}`); // Debug
+            console.log(`Buikomtrek Vrouw selected: data-gender-points=${waistRadioVrouw.dataset.genderPoints}`);
         } else if (waistRadioMan) {
             waistValue = parseInt(waistRadioMan.dataset.genderPoints, 10);
-             console.log(`Buikomtrek Man selected: data-gender-points=${waistRadioMan.dataset.genderPoints}`); // Debug
+             console.log(`Buikomtrek Man selected: data-gender-points=${waistRadioMan.dataset.genderPoints}`);
         } else if (waistRadioGeneral) {
-            waistValue = parseInt(waistRadioGeneral.value, 10); // Zou 0 moeten zijn
-             console.log(`Buikomtrek Algemeen selected: value=${waistRadioGeneral.value}`); // Debug
-        } else {
-             console.warn("No Buikomtrek option selected?"); // Debug
-        }
-
+            waistValue = parseInt(waistRadioGeneral.value, 10);
+             console.log(`Buikomtrek Algemeen selected: value=${waistRadioGeneral.value}`);
+        } else { console.warn("No Buikomtrek option selected?"); }
         if (!isNaN(waistValue)) {
             score += waistValue;
-            console.log(`+${waistValue} points from Buikomtrek`); // Debug
-        } else {
-             console.warn(`NaN value found for Buikomtrek`); // Debug
-        }
+            console.log(`+${waistValue} points from Buikomtrek`);
+        } else { console.warn(`NaN value found for Buikomtrek`); }
 
-
-        console.log(`=== Total Calculated Score: ${score} ===`); // Debug
+        console.log(`=== Total Calculated Score: ${score} ===`);
         return score;
     }
-    // === EINDE GECORRIGEERDE Score Berekening ===
 
-
-    // Update de resultaten op pagina 2
     function displayResults(score) {
-        finalScoreDisplay.textContent = `${score} p.`;
+        // === DEZE REGEL IS AANGEPAST ===
+        finalScoreDisplay.textContent = `${score} ${score === 1 ? 'punt' : 'punten'}`;
+        // ================================
         const maxScore = 26;
         let scorePercentage = Math.max(0, Math.min(100, (score / maxScore) * 100));
         scoreIndicator.style.top = `${scorePercentage}%`;
@@ -179,7 +150,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Wissel tussen pagina's
     function showPage(pageToShow) {
         if (pageToShow === 'page1') {
             page1.classList.remove('hidden'); page1.classList.add('visible');
@@ -191,22 +161,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-
     // === Event Listeners ===
-
-    // Controleer hoofdknop bij elke wijziging in risicoformulier
     form.addEventListener('change', checkAllQuestionsAnswered);
-
-    // Bereken BMI bij klikken op BMI knop
     if (calculateBmiButton) {
          calculateBmiButton.addEventListener('click', calculateAndDisplayBMI);
-         console.log("BMI button event listener attached"); // Debug
-    } else {
-         console.error("BMI Calculate Button not found!"); // Debug
-    }
-
-     // Bereken BMI ook bij Enter in een van de input velden
-     [heightInput, weightInput].forEach(input => {
+         console.log("BMI button event listener attached");
+    } else { console.error("BMI Calculate Button not found!"); }
+    [heightInput, weightInput].forEach(input => {
         if(input) {
             input.addEventListener('keypress', function(event) {
                 if (event.key === 'Enter') {
@@ -214,26 +175,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     calculateAndDisplayBMI();
                 }
             });
-        } else {
-             console.error("Height or Weight input not found!"); // Debug
-        }
-     });
-
-
-    // Bereken risicoscore en toon resultaten bij klikken op hoofdknop
+        } else { console.error("Height or Weight input not found!"); }
+    });
     calculateButton.addEventListener('click', () => {
-        console.log("Main Calculate button clicked"); // Debug
+        console.log("Main Calculate button clicked");
         calculatedScore = calculateTotalRiskScore();
         displayResults(calculatedScore);
         showPage('page2');
     });
-
-    // Ga terug naar de test
     backButton.addEventListener('click', () => {
         showPage('page1');
     });
 
     // === Initialisatie ===
-    checkAllQuestionsAnswered(); // Check bij laden pagina
+    checkAllQuestionsAnswered();
 
 });
